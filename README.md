@@ -8,4 +8,5 @@
   - Show line numberings
 - ## Tmux
   - Simple install
-  
+- ## Terminal
+  - Set editing to vi style
