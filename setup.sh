@@ -15,3 +15,4 @@ else
 fi
 
 cp ./.vimrc ~/
+cp ./.tmux.conf ~/
