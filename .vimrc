@@ -92,6 +92,7 @@ try
 source ~/.vim_runtime/my_configs.vim
 catch
 endtry
+set list lcs=tab:\|\
 nnoremap gh <C-W><C-H> 
 nnoremap gj <C-W><C-J> 
 nnoremap gk <C-W><C-K> 

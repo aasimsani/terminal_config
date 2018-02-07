@@ -4,6 +4,8 @@ apt-get install tmux
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 if [ -f ~/.bashrc ];
     then
         echo ".bashrc exists. Appending"
