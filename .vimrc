@@ -8,6 +8,8 @@ Plug 'junegunn/vim-easy-align'
 " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'https://github.com/ervandew/supertab.git'
+Plug 'https://github.com/xolox/vim-misc.git'
+"Plug 'https://github.com/xolox/vim-colorscheme-switcher.git'
 "Plug 'https://github.com/Yggdroot/indentLine.git'
 " Multiple Plug commands can be written in a single line using | separators
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -15,6 +17,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" Plug 'Taverius/vim-colorscheme-manager'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 " Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
@@ -49,6 +52,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'Yggdroot/indentLine'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -118,7 +122,7 @@ function! ToggleIndentGuidesTabs()
 endfunction
 
 let &t_SI.="\e[5 q"
-let &t_EI.="\e[5 q"
+let &t_EI.="\e[1 q"
 
 function! ToggleIndentGuidesSpaces()
     if exists('b:iguides_spaces')
