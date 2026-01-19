@@ -1,0 +1,28 @@
+# Machine-specific
+*.local
+.zshrc.local
+
+# Tool directories (session-specific)
+.claude/
+.serena/
+
+# Neovim
+nvim/plugin/
+nvim/.luarc.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Secrets (should never be here, but just in case)
+*.pem
+*.key
+.env
+.env.*
+credentials*
+secrets*
