@@ -58,6 +58,7 @@ export EDITOR='nvim'
 # Aliases
 alias vim='nvim'
 alias v='nvim'
+alias cc='claude-chill claude'
 
 # Zsh options
 setopt nocaseglob  # Case insensitive globbing
@@ -92,6 +93,15 @@ esac
 
 # uv (Python package manager)
 command -v uv &>/dev/null && eval "$(uv generate-shell-completion zsh)"
+
+# atuin (shell history)
+command -v atuin &>/dev/null && eval "$(atuin init zsh)"
+
+# zoxide (smarter cd)
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+
+# sesh (tmux session manager)
+command -v sesh &>/dev/null && eval "$(sesh completion zsh)"
 
 # ============================================================================
 # PATH Configuration

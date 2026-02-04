@@ -1,0 +1,97 @@
+# ============================================
+# THEME & APPEARANCE
+# ============================================
+
+# Theme (uncomment to use)
+# theme = Catppuccin Mocha
+
+# Custom macOS dock/app switcher icon
+macos-custom-icon = ~/Documents/ghostty/icon_128x128@2x.png
+macos-icon = custom
+
+# ============================================
+# FONT & LIGATURES
+# ============================================
+
+# Enable contextual alternates (programming ligatures like != => ->)
+# Use -calt to disable. Add -liga, -dlig to disable all ligatures
+font-feature = calt
+
+# Default starting directory for new windows
+working-directory = ~/
+
+# New tabs/splits inherit the current working directory
+window-inherit-working-directory = true
+
+# ============================================
+# CLIPBOARD & SELECTION
+# ============================================
+
+# Automatically copy text when selected (like Linux terminals)
+copy-on-select = true
+
+# Remove trailing whitespace when copying
+clipboard-trim-trailing-spaces = true
+
+# Allow terminal programs to read from clipboard (OSC 52)
+clipboard-read = allow
+
+# Allow terminal programs to write to clipboard (OSC 52)
+clipboard-write = allow
+
+# ============================================
+# CURSOR
+# ============================================
+
+# Cursor shape: block, bar, underline, or block_hollow
+cursor-style = block
+
+# Alt/Option+click to move cursor at shell prompts
+# Requires shell integration
+cursor-click-to-move = true
+
+# ============================================
+# MOUSE & INTERACTION
+# ============================================
+
+# Ctrl/Cmd+click to open URLs in browser
+link-url = true
+
+# Hide mouse cursor while typing
+mouse-hide-while-typing = true
+
+# ============================================
+# BELL
+# ============================================
+
+# Visual bell: flash window border instead of audible bell
+bell-feature = border
+
+# ============================================
+# PERFORMANCE & RENDERING
+# ============================================
+
+# Sync rendering with monitor refresh rate
+# Reduces flickering and tearing (helpful for Claude Code)
+window-vsync = true
+
+# Disable shader animation to reduce CPU usage
+# Only relevant if using custom shaders
+custom-shader-animation = false
+
+scrollback-limit = 1000000000
+
+# ============================================
+# SHELL INTEGRATION
+# ============================================
+
+# Auto-detect shell type (bash, zsh, fish, etc.)
+shell-integration = detect
+
+# Shell integration features:
+#   cursor    - Bar cursor at prompts
+#   sudo      - Preserve terminfo with sudo
+#   title     - Set window title from shell
+#   ssh-env   - Convert TERM for SSH compatibility
+#   ssh-terminfo - Auto-install terminfo on remote hosts
+shell-integration-features = cursor, sudo, title, ssh-env, ssh-terminfo

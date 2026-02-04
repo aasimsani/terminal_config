@@ -6,6 +6,7 @@ Modern terminal configuration for Neovim, Tmux, and Zsh.
 
 - **Neovim** with lazy.nvim (fast, lazy-loading plugin manager)
 - **Tmux** with modern syntax and vim-tmux-navigator
+- **Ghostty** terminal configuration with visual bell, shell integration
 - **Zsh** with Oh-My-Zsh and vi-mode
 - **Cross-platform** setup script (macOS, Ubuntu/Debian, Fedora, Arch)
 
@@ -39,6 +40,8 @@ terminal_config/
 │           └── treesitter.lua
 ├── tmux/
 │   └── .tmux.conf        # Tmux configuration (symlinked to ~/.tmux.conf)
+├── ghostty/
+│   └── config            # Ghostty terminal config (symlinked to ~/.config/ghostty/config)
 └── zsh/
     └── .zshrc            # Reference Zsh config (Oh-My-Zsh + vi-mode)
 ```
@@ -143,6 +146,7 @@ terminal_config/
 The setup script:
 - Links `nvim/` → `~/.config/nvim`
 - Links `tmux/.tmux.conf` → `~/.tmux.conf`
+- Links `ghostty/config` → `~/.config/ghostty/config`
 - **Safely appends** Neovim aliases to existing `~/.zshrc` (idempotent)
 - Installs TPM (Tmux Plugin Manager)
 
@@ -152,7 +156,7 @@ The `zsh/.zshrc` file is a **reference configuration** with:
 - Oh-My-Zsh with robbyrussell theme
 - Vi-mode with menu navigation (h/j/k/l in completion)
 - Plugins: git, python, docker, zsh-vi-mode, zsh-syntax-highlighting, zsh-autosuggestions
-- Tool integrations: conda, nvm, pnpm, uv, gcloud
+- Tool integrations: atuin, zoxide, sesh, conda, nvm, pnpm, uv, gcloud
 
 The setup script appends essential aliases (`vim='nvim'`, `EDITOR='nvim'`) to your existing `.zshrc` rather than replacing it. To use the full reference config, copy it manually:
 
@@ -166,6 +170,47 @@ cp zsh/.zshrc ~/.zshrc
 - Tmux 3.0+
 - Git
 - A [Nerd Font](https://www.nerdfonts.com/) for icons
+
+## CLI Tools
+
+The setup script installs these productivity tools:
+
+| Tool | Description | Usage |
+|------|-------------|-------|
+| [atuin](https://github.com/atuinsh/atuin) | Shell history with sync & search | `Ctrl+R` for fuzzy search |
+| [zoxide](https://github.com/ajeetdsouza/zoxide) | Smarter cd command | `z <partial-dir>` to jump |
+| [sesh](https://github.com/joshmedeski/sesh) | Tmux session manager | `sesh connect <name>` |
+| [fzf](https://github.com/junegunn/fzf) | Fuzzy finder | Used by other tools |
+
+### Installation by Platform
+
+| Tool | macOS | Debian/Ubuntu | Fedora | Arch |
+|------|-------|---------------|--------|------|
+| atuin | `brew install atuin` | [installer](https://setup.atuin.sh) | [installer](https://setup.atuin.sh) | [installer](https://setup.atuin.sh) |
+| zoxide | `brew install zoxide` | `apt install zoxide` | `dnf install zoxide` | `pacman -S zoxide` |
+| sesh | `brew install sesh` | `go install github.com/joshmedeski/sesh@latest` | `go install ...` | `go install ...` |
+| fzf | `brew install fzf` | `apt install fzf` | `dnf install fzf` | `pacman -S fzf` |
+
+### Post-Install Setup
+
+Add these to the end of your `~/.zshrc` (already included in `zsh/.zshrc`):
+
+```bash
+# atuin (shell history)
+eval "$(atuin init zsh)"
+
+# zoxide (smarter cd)
+eval "$(zoxide init zsh)"
+
+# sesh (tmux session manager)
+eval "$(sesh completion zsh)"
+```
+
+**atuin**: Run `atuin register` to enable cross-machine sync (optional). Use `Ctrl+R` to search history.
+
+**zoxide**: Use `z <partial-dir>` to jump to frequently used directories.
+
+**sesh**: Use `sesh list` to see sessions, `sesh connect <name>` to connect.
 
 ## Performance
 

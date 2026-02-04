@@ -93,7 +93,7 @@ install_packages_macos() {
     fi
 
     # Install packages
-    brew install neovim tmux ripgrep fd
+    brew install neovim tmux ripgrep fd fzf atuin zoxide sesh
 
     success "macOS packages installed"
 }
@@ -101,11 +101,27 @@ install_packages_macos() {
 install_packages_debian() {
     info "Installing packages via apt..."
     sudo apt-get update
-    sudo apt-get install -y neovim tmux ripgrep fd-find curl git
+    sudo apt-get install -y neovim tmux ripgrep fd-find fzf zoxide curl git
 
     # fd is named fd-find on Debian/Ubuntu, create symlink if needed
     if ! command_exists fd && command_exists fdfind; then
         sudo ln -sf "$(which fdfind)" /usr/local/bin/fd
+    fi
+
+    # atuin (not in apt, use installer script)
+    if ! command_exists atuin; then
+        info "Installing atuin..."
+        curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+    fi
+
+    # sesh (not in apt, install via go)
+    if ! command_exists sesh; then
+        if command_exists go; then
+            info "Installing sesh via go..."
+            go install github.com/joshmedeski/sesh@latest
+        else
+            warn "sesh requires Go. Install Go first, then run: go install github.com/joshmedeski/sesh@latest"
+        fi
     fi
 
     success "Debian/Ubuntu packages installed"
@@ -113,13 +129,47 @@ install_packages_debian() {
 
 install_packages_fedora() {
     info "Installing packages via dnf..."
-    sudo dnf install -y neovim tmux ripgrep fd-find curl git
+    sudo dnf install -y neovim tmux ripgrep fd-find fzf zoxide curl git
+
+    # atuin (not in dnf, use installer script)
+    if ! command_exists atuin; then
+        info "Installing atuin..."
+        curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+    fi
+
+    # sesh (not in dnf, install via go)
+    if ! command_exists sesh; then
+        if command_exists go; then
+            info "Installing sesh via go..."
+            go install github.com/joshmedeski/sesh@latest
+        else
+            warn "sesh requires Go. Install Go first, then run: go install github.com/joshmedeski/sesh@latest"
+        fi
+    fi
+
     success "Fedora/RHEL packages installed"
 }
 
 install_packages_arch() {
     info "Installing packages via pacman..."
-    sudo pacman -Syu --noconfirm neovim tmux ripgrep fd curl git
+    sudo pacman -Syu --noconfirm neovim tmux ripgrep fd fzf zoxide curl git
+
+    # atuin (use installer script for consistency)
+    if ! command_exists atuin; then
+        info "Installing atuin..."
+        curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+    fi
+
+    # sesh (install via go)
+    if ! command_exists sesh; then
+        if command_exists go; then
+            info "Installing sesh via go..."
+            go install github.com/joshmedeski/sesh@latest
+        else
+            warn "sesh requires Go. Install Go first, then run: go install github.com/joshmedeski/sesh@latest"
+        fi
+    fi
+
     success "Arch packages installed"
 }
 
@@ -130,7 +180,7 @@ install_packages() {
         fedora) install_packages_fedora ;;
         arch) install_packages_arch ;;
         *)
-            warn "Unknown OS. Please install manually: neovim tmux ripgrep fd"
+            warn "Unknown OS. Please install manually: neovim tmux ripgrep fd fzf atuin zoxide sesh"
             warn "Then re-run this script with --skip-packages"
             ;;
     esac
@@ -149,6 +199,10 @@ link_configs() {
 
     # Tmux
     create_symlink "$SCRIPT_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
+
+    # Ghostty
+    mkdir -p "$HOME/.config/ghostty"
+    create_symlink "$SCRIPT_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 
     # Zsh - append essential aliases to existing .zshrc
     append_zsh_config
@@ -270,6 +324,7 @@ EXAMPLES:
 WHAT IT DOES:
     - Links nvim/ to ~/.config/nvim
     - Links tmux/.tmux.conf to ~/.tmux.conf
+    - Links ghostty/config to ~/.config/ghostty/config
     - Appends Neovim aliases to existing ~/.zshrc (safe, idempotent)
     - Installs TPM (Tmux Plugin Manager)
 
@@ -334,9 +389,10 @@ main() {
     echo "  3. In tmux, press: C-a I (to install tmux plugins)"
     echo ""
     info "Configuration locations:"
-    echo "  Neovim: ~/.config/nvim -> $SCRIPT_DIR/nvim"
-    echo "  Tmux:   ~/.tmux.conf   -> $SCRIPT_DIR/tmux/.tmux.conf"
-    echo "  Zsh:    ~/.zshrc       (aliases appended)"
+    echo "  Neovim:  ~/.config/nvim          -> $SCRIPT_DIR/nvim"
+    echo "  Tmux:    ~/.tmux.conf            -> $SCRIPT_DIR/tmux/.tmux.conf"
+    echo "  Ghostty: ~/.config/ghostty/config -> $SCRIPT_DIR/ghostty/config"
+    echo "  Zsh:     ~/.zshrc                (aliases appended)"
     echo ""
 }
 
