@@ -64,8 +64,9 @@ mouse-hide-while-typing = true
 # BELL
 # ============================================
 
-# Visual bell: flash window border instead of audible bell
-bell-feature = border
+# Visual bell options: title, badge, bounce, attention, audio
+# Use comma-separated list, prefix with "no-" to disable (e.g., no-badge)
+bell-features = title
 
 # ============================================
 # PERFORMANCE & RENDERING
@@ -95,3 +96,23 @@ shell-integration = detect
 #   ssh-env   - Convert TERM for SSH compatibility
 #   ssh-terminfo - Auto-install terminfo on remote hosts
 shell-integration-features = cursor, sudo, title, ssh-env, ssh-terminfo
+
+# ============================================
+# SPLITS & PANE NAVIGATION
+# ============================================
+
+# Create splits
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+# Vim-style navigation (Option + hjkl)
+keybind = opt+h=goto_split:left
+keybind = opt+j=goto_split:bottom
+keybind = opt+k=goto_split:top
+keybind = opt+l=goto_split:right
+
+# Close current split
+keybind = cmd+w=close_surface
+
+# Equalize split sizes
+keybind = cmd+shift+e=equalize_splits

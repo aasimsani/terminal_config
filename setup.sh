@@ -204,6 +204,10 @@ link_configs() {
     mkdir -p "$HOME/.config/ghostty"
     create_symlink "$SCRIPT_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 
+    # Atuin
+    mkdir -p "$HOME/.config/atuin"
+    create_symlink "$SCRIPT_DIR/atuin/config.toml" "$HOME/.config/atuin/config.toml"
+
     # Zsh - append essential aliases to existing .zshrc
     append_zsh_config
 
@@ -325,6 +329,7 @@ WHAT IT DOES:
     - Links nvim/ to ~/.config/nvim
     - Links tmux/.tmux.conf to ~/.tmux.conf
     - Links ghostty/config to ~/.config/ghostty/config
+    - Links atuin/config.toml to ~/.config/atuin/config.toml
     - Appends Neovim aliases to existing ~/.zshrc (safe, idempotent)
     - Installs TPM (Tmux Plugin Manager)
 
@@ -389,10 +394,11 @@ main() {
     echo "  3. In tmux, press: C-a I (to install tmux plugins)"
     echo ""
     info "Configuration locations:"
-    echo "  Neovim:  ~/.config/nvim          -> $SCRIPT_DIR/nvim"
-    echo "  Tmux:    ~/.tmux.conf            -> $SCRIPT_DIR/tmux/.tmux.conf"
-    echo "  Ghostty: ~/.config/ghostty/config -> $SCRIPT_DIR/ghostty/config"
-    echo "  Zsh:     ~/.zshrc                (aliases appended)"
+    echo "  Neovim:  ~/.config/nvim               -> $SCRIPT_DIR/nvim"
+    echo "  Tmux:    ~/.tmux.conf                 -> $SCRIPT_DIR/tmux/.tmux.conf"
+    echo "  Ghostty: ~/.config/ghostty/config     -> $SCRIPT_DIR/ghostty/config"
+    echo "  Atuin:   ~/.config/atuin/config.toml  -> $SCRIPT_DIR/atuin/config.toml"
+    echo "  Zsh:     ~/.zshrc                     (aliases appended)"
     echo ""
 }
 
