@@ -98,7 +98,7 @@ command -v uv &>/dev/null && eval "$(uv generate-shell-completion zsh)"
 command -v atuin &>/dev/null && eval "$(atuin init zsh)"
 
 # zoxide (smarter cd)
-command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh --cmd cd)"
 
 # sesh (tmux session manager)
 command -v sesh &>/dev/null && eval "$(sesh completion zsh)"
